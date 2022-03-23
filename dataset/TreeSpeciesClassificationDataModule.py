@@ -17,9 +17,13 @@ class TreeSpeciesClassificationDataModule(LightningDataModule):
 
         self.batch_size = batch_size
 
-        self.train, self.test, self.val = self.split_dataset(
-            TreeSpeciesClassification(image_dir='dataset/species_classification')
-        )
+        self.dataset = TreeSpeciesClassification(image_dir='dataset/species_classification')
+
+        self.train, self.test, self.val = self.split_dataset(self.dataset)
+
+    @property
+    def num_classes(self):
+        return self.dataset.num_classes
 
     @staticmethod
     def split_dataset(dataset: Dataset) -> list[Subset[Dataset]]:
