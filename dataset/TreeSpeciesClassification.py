@@ -48,7 +48,7 @@ class TreeSpeciesClassification(Dataset):
             'Erl': 'Alder',
             'Fi': 'Spruce',
             'Ki': 'Pine',
-            'Lä': 'Larch',
+            'La': 'Larch',
             'Sch': 'Shadow / background'
         }
 
@@ -65,9 +65,7 @@ class TreeSpeciesClassification(Dataset):
         """
         image = open(self.images[index]).convert("RGB")
 
-        image.show()
-
-        return self.transform(image)
+        return self.transform(image).float()
 
     def load_target(self, index: int) -> int:
         """
@@ -76,7 +74,8 @@ class TreeSpeciesClassification(Dataset):
         folder structure
         :return: the target class's index
         """
-        return list(self.labels.keys()).index(self.images[index].split('/')[1])
+        label = self.images[index].split('/')[-2]
+        return list(self.labels.keys()).index(label)
 
     def __getitem__(self, index) -> tuple[Tensor, int]:
         """

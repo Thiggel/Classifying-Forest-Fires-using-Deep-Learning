@@ -1,4 +1,7 @@
 from dataset.TreeSpeciesClassificationDataModule import TreeSpeciesClassificationDataModule
+from pytorch_lightning import Trainer
+from torch import cuda
+
 from model import Model
 
 

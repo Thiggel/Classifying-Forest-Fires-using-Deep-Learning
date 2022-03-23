@@ -2,7 +2,7 @@ from pytorch_lightning import LightningDataModule
 from torch.utils.data import Dataset, random_split, Subset, DataLoader
 from typing import Sequence
 
-from TreeSpeciesClassification import TreeSpeciesClassification
+from dataset.TreeSpeciesClassification import TreeSpeciesClassification
 
 
 class TreeSpeciesClassificationDataModule(LightningDataModule):
