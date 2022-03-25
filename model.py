@@ -117,16 +117,8 @@ class Model(LightningModule):
 
     def training_epoch_end(self, _) -> None:
         """
-        At the end of each epoch we print and save the epoch's
-        training loss and save the model
+        At the end of each epoch we save the model
         """
-        self.log('train_acc_epoch', self.accuracy)
-
-        loss = compute_epoch_loss_from_outputs(outputs)
-
-        print('Training loss for Epoch: ', loss)
-
-        # save the model after every epoch
         self.save()
 
     def save(self) -> None:
