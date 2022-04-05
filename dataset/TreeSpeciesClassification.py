@@ -9,7 +9,7 @@ from torchvision.transforms import PILToTensor, Compose, RandomHorizontalFlip, R
 class TreeSpeciesClassification(Dataset):
     def __init__(self, image_dir: str) -> None:
         """
-        This dataset provides pictures of tree tops (from above) and they're
+        This dataset provides pictures of tree tops (from above) and their
         corresponding labels
         :param image_dir: the path to the folder that contains the dataset's images
         """
