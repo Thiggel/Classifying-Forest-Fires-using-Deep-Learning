@@ -8,6 +8,7 @@ from torch import Tensor, save, load
 from torch.nn.functional import cross_entropy
 from torchmetrics import Accuracy
 from os.path import isfile
+from typing import Tuple, List
 
 
 class Model(LightningModule):
@@ -44,7 +45,7 @@ class Model(LightningModule):
         """
         return self.softmax(self.dropout(self.model(x)))
 
-    def configure_optimizers(self) -> tuple[list[Optimizer], list[LRSchedulerType]]:
+    def configure_optimizers(self) -> Tuple[List[Optimizer], List[LRSchedulerType]]:
         """
         This methods specifies the optimizer and learning rate scheduler.
         We use ADAM and a ReduceOnPlateau learning rate scheduler that

@@ -4,6 +4,7 @@ from os import walk
 from os.path import join
 from PIL.Image import open
 from torchvision.transforms import PILToTensor, Compose, RandomHorizontalFlip, RandomVerticalFlip, ColorJitter
+from typing import Tuple
 
 
 class TreeSpeciesClassification(Dataset):
@@ -77,7 +78,7 @@ class TreeSpeciesClassification(Dataset):
         label = self.images[index].split('/')[-2]
         return list(self.labels.keys()).index(label)
 
-    def __getitem__(self, index) -> tuple[Tensor, int]:
+    def __getitem__(self, index) -> Tuple[Tensor, int]:
         """
         Load a data point
         :param index: the index of the image in the flattened

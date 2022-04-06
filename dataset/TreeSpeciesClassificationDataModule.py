@@ -1,6 +1,6 @@
 from pytorch_lightning import LightningDataModule
 from torch.utils.data import Dataset, random_split, Subset, DataLoader
-from typing import Sequence
+from typing import Sequence, List
 
 from dataset.TreeSpeciesClassification import TreeSpeciesClassification
 
@@ -26,7 +26,7 @@ class TreeSpeciesClassificationDataModule(LightningDataModule):
         return self.dataset.num_classes
 
     @staticmethod
-    def split_dataset(dataset: Dataset) -> list[Subset[Dataset]]:
+    def split_dataset(dataset: Dataset) -> List[Subset[Dataset]]:
         """
         Split a dataset into a training set, a validation set,
         and a test set
