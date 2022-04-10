@@ -3,6 +3,7 @@ Author: Filipe Laitenberger
 """
 
 from pytorch_lightning import Trainer, LightningModule, LightningDataModule
+from pytorch_lightning.callbacks.early_stopping import EarlyStopping
 from torch import cuda
 
 from dataset.TreeSpeciesClassificationDataModule import TreeSpeciesClassificationDataModule
@@ -22,7 +23,8 @@ def run_model(model: LightningModule, data_module: LightningDataModule) -> None:
     trainer = Trainer(
         max_epochs=100,
         # if GPUs are available, use all of them
-        gpus=(-1 if cuda.is_available() else 0)
+        gpus=(-1 if cuda.is_available() else 0),
+        callbacks=[EarlyStopping(monitor="val_loss")]
     )
 
     # calculate optimal learning rate
