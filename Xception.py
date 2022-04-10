@@ -1,5 +1,5 @@
 """
-Author: Filipe Laitenberger
+Author: Filipe Laitenberger, Thijs van der Laan
 """
 
 import timm

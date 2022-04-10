@@ -64,11 +64,11 @@ class TreeSpeciesClassificationDataModule(LightningDataModule):
         Get a data loader that shuffles and provides batches of the validation set
         :return: the validation data loader
         """
-        return DataLoader(self.val, batch_size=self.batch_size, num_workers=12)
+        return DataLoader(self.val, batch_size=self.batch_size, shuffle=True, num_workers=12)
 
     def test_dataloader(self) -> DataLoader:
         """
         Get a data loader that shuffles and provides batches of the test set
         :return: the test data loader
         """
-        return DataLoader(self.test, batch_size=self.batch_size, num_workers=12)
+        return DataLoader(self.test, batch_size=self.batch_size, shuffle=True, num_workers=12)
