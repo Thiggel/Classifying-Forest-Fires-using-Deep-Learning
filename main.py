@@ -17,8 +17,7 @@ if __name__ == '__main__':
     trainer = Trainer(
         max_epochs=300,
         # if GPUs are available, use all of them
-        gpus=(-1 if cuda.is_available() else 0),
-        callbacks=[EarlyStopping(monitor="val_loss")]
+        gpus=(-1 if cuda.is_available() else 0)
     )
 
     # train the network
