@@ -2,10 +2,10 @@
 Author: Filipe Laitenberger
 """
 
-from dataset.TreeSpeciesClassificationDataModule import TreeSpeciesClassificationDataModule
 from pytorch_lightning import Trainer, LightningModule, LightningDataModule
 from torch import cuda
 
+from dataset.TreeSpeciesClassificationDataModule import TreeSpeciesClassificationDataModule
 from Xception import Xception
 from Lenet5 import LeNet5
 
@@ -45,8 +45,8 @@ if __name__ == '__main__':
     data_module = TreeSpeciesClassificationDataModule()
 
     models = [
-        Xception(num_classes=data_module.num_classes),
-        LeNet5(num_classes=data_module.num_classes)
+        Xception(num_classes=data_module.num_classes, filename='xception.pt'),
+        LeNet5(num_classes=data_module.num_classes, filename='lenet5.pt')
     ]
 
     for model in models:
