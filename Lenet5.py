@@ -1,5 +1,6 @@
 """
 Author: Mohamed Gamil
+        Thijs van der Laan
 """
 
 import torch.nn as nn
@@ -34,8 +35,12 @@ class LeNet5(TreeClassificationModel):
         
         self.fc = nn.Linear(7744, 120)
         self.relu = nn.ReLU()
-        self.fc1 = nn.Linear(120, 84)
-        self.relu1 = nn.ReLU()
+
+        self.layer3 = nn.Sequential(
+            nn.Conv2d(120, 84, kernel_size=(5, 5), stride=(1, 1), padding=0),
+            nn.ReLU(),
+        )
+
         self.fc2 = nn.Linear(84, num_classes)
 
     def forward(self, x: Tensor) -> Tensor:
@@ -49,8 +54,7 @@ class LeNet5(TreeClassificationModel):
         out = out.reshape(out.size(0), -1)
         out = self.fc(out)
         out = self.relu(out)
-        out = self.fc1(out)
-        out = self.relu1(out)
+        out = self.layer3(out)
         out = self.fc2(out)
 
         return out
