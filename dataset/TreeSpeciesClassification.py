@@ -1,5 +1,6 @@
 """
 Author: Filipe Laitenberger
+        Thijs van der Laan
 """
 
 from torch.utils.data import Dataset
@@ -15,7 +16,8 @@ class TreeSpeciesClassification(Dataset):
     def __init__(self, image_dir: str) -> None:
         """
         This dataset provides pictures of tree tops (from above) and their
-        corresponding labels
+        corresponding labels.
+        It also performs Data Augmentation on the dataset
         :param image_dir: the path to the folder that contains the dataset's images
         """
         super().__init__()
@@ -63,8 +65,8 @@ class TreeSpeciesClassification(Dataset):
         the image with index 0 is the first image from the first sub folder of the dataset,
         and if, for instance, the first folder contains 1000 images, then the index 1000
         corresponds to the first image of the second sub folder, and so on.
-        The image is then transformed to a tensor and augmented (randomly flipped, and the
-        contrast/brightness/saturation is randomly changed)
+        The image is then transformed to a tensor and augmented (randomly flipped both horizontally and vertically,
+        and the contrast/brightness/saturation is randomly changed)
         :param index: the index of the image in the flattened file structure
         :return: the transformed image
         """
