@@ -1,49 +1,35 @@
-import timm
+"""
+Author: Filipe Laitenberger
+"""
+
 from pytorch_lightning import LightningModule
-from torch.nn import Linear, Dropout, Softmax
 from torch.optim import Adam, Optimizer
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from pytorch_lightning.utilities.types import LRSchedulerType
 from torch import Tensor, save, load
 from torch.nn.functional import cross_entropy
-from torchmetrics import Accuracy
 from os.path import isfile
 from typing import Tuple, List
+from torchmetrics import Accuracy
 
 
-class Model(LightningModule):
-    def __init__(self, num_classes: int, learning_rate: float = 0.05, dropout: float = 0.1, filename: str = 'model.pt') -> None:
+class TreeClassificationModel(LightningModule):
+    def __init__(self, learning_rate: float = 0.05, filename: str = 'model.pt') -> None:
         """
-        This model is an image classifier inspired by the 'Xception' model
-        :param num_classes: the number of classes in the dataset
+        This class serves as an abstract class that implements methods
+        both models in this study use, like the training/validation/testing steps
+        and configurations options such as optimizers and schedulers
+        :param learning_rate: The learning rate of the model
+        :param filename: The filename under which it will be saved after each epoch
         """
         super().__init__()
 
         self.filename = filename
-
-        # we use a predefined model 'Xception' as it is
-        # one of the state of the art networks
-        self.model = timm.create_model('xception')
-
-        # change the last layer of the network to map to the
-        # classes of our dataset
-        self.model.fc = Linear(2048, num_classes)
-
-        self.dropout = Dropout(dropout)
-
-        self.softmax = Softmax(dim=1)
-
         self.learning_rate = learning_rate
-
         self.accuracy = Accuracy()
 
-    def forward(self, x):
-        """
-        feed images through the model
-        :param x: The images
-        :return: A tensor of class probabilities
-        """
-        return self.softmax(self.dropout(self.model(x)))
+    def forward(self, x: Tensor) -> Tensor:
+        pass
 
     def configure_optimizers(self) -> Tuple[List[Optimizer], List[LRSchedulerType]]:
         """

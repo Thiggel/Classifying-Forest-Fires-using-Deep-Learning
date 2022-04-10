@@ -1,3 +1,7 @@
+"""
+Author: Filipe Laitenberger
+"""
+
 from torch.utils.data import Dataset
 from torch import Tensor
 from os import walk
